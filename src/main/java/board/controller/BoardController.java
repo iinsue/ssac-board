@@ -27,4 +27,16 @@ public class BoardController {
 		
 		return mv;
 	}
+	
+	// 게시글 등록 페이지에 대한 요청을 처리하는 컨트롤러
+	@RequestMapping("/board/openBoardWrite.do")
+	public String openBoardWrite() throws Exception {
+		return "/board/boardWrite";
+	}
+	
+	@RequestMapping("/board/insertBoard.do")
+	public String insertBoard(BoardDto board) throws Exception {
+		boardService.insertBoard(board);
+		return "redirect:/board/openBoardList.do";
+	}
 }

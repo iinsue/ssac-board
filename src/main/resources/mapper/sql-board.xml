@@ -21,5 +21,12 @@
 		 order by board_idx desc
 	]]>
 	</select>
+	
+	<insert id="insertBoard" parameterType="board.dto.BoardDto">
+	<![CDATA[
+	insert into t_board (title, contents, created_datetime, creator_id)
+	values (#{title}, #{contents}, now(), 'tester');
+	]]>
+	</insert>
 
 </mapper>
