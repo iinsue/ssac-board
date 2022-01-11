@@ -12,7 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.BoardDto;
 import board.service.BoardService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class BoardController {
 	
@@ -43,6 +45,11 @@ public class BoardController {
 	
 	@RequestMapping("/board/openBoardDetail.do")
 	public ModelAndView openBoardDetail(@RequestParam int boardIdx) throws Exception {
+		log.trace("trace openBoardList()");
+		log.debug("debug openBoardList()");
+		log.info("info openBoardList()");
+		log.warn("warn openBoardList()");
+		log.error("error openBoardList()");
 		ModelAndView mv = new ModelAndView("/board/boardDetail");
 		
 		BoardDto data = boardService.selectBoardDetail(boardIdx);
