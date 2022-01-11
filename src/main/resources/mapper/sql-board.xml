@@ -47,5 +47,24 @@
 		update t_board set hit_cnt = hit_cnt + 1 where board_idx = #{boardIdx}
 	]]>
 	</update>
+	
+	<update id="updateBoard" parameterType="board.dto.BoardDto">
+		update t_board set title = #{title}, contents = #{contents}
+		                 , updated_datetime = now(), updator_id = 'tester'
+		             where board_idx = #{boardIdx}
+	</update>
+
+	<!-- 데이터를 삭제하지 않고, 삭제 여부 플래그만 변경 -->
+	<!-- 
+	<delete id="deleteBoard" parameterType="board.dto.BoardDto">
+		delete from t_board where board_idx = #{boardIdx}
+	</delete>
+	 -->
+	<update id="deleteBoard" parameterType="board.dto.BoardDto">
+		update t_board set deleted_yn = 'Y'
+		                 , updated_datetime = now(), updator_id = 'tester'
+		             where board_idx = #{boardIdx}
+	</update>
+	
 
 </mapper>
