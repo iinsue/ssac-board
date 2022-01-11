@@ -24,9 +24,28 @@
 	
 	<insert id="insertBoard" parameterType="board.dto.BoardDto">
 	<![CDATA[
-	insert into t_board (title, contents, created_datetime, creator_id)
-	values (#{title}, #{contents}, now(), 'tester');
-	]]>
+		insert into t_board (title, contents, created_datetime, creator_id) 
+		values (#{title}, #{contents}, now(), 'tester');
+	]]>	
 	</insert>
+	
+	<!-- 게시판 상세 보기 쿼리 -->
+	<select id="selectBoardDetail" parameterType="int" resultType="board.dto.BoardDto">
+	<![CDATA[
+		select board_idx, title, hit_cnt, contents,
+		       date_format(created_datetime, '%Y.%m.%d %H:%i:%s') as created_datetime, 
+		       creator_id
+		  from t_board
+		 where deleted_yn = 'N'
+		   and board_idx = #{boardIdx}
+	]]>
+	</select>
+	
+	<!-- 카운트를 증가시키는 쿼리 -->
+	<update id="updateHitCount" parameterType="int">
+	<![CDATA[
+		update t_board set hit_cnt = hit_cnt + 1 where board_idx = #{boardIdx}
+	]]>
+	</update>
 
 </mapper>

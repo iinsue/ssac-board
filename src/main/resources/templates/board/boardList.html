@@ -26,7 +26,14 @@
 			<tbody>
 				<tr th:if="${#lists.size(resultList)} > 0" th:each="boardDto : ${resultList}" >
 					<td th:text="${boardDto.boardIdx}"></td>
+					<!-- 
 					<td th:text="${boardDto.title}"></td>
+					-->
+					<td class="title">
+						<a href="/board/openBoardDetail.do?boardIdx=" 
+							th:attrappend="href=${boardDto.boardIdx}" 
+							th:text="${boardDto.title}"></a>
+					</td>
 					<td th:text="${boardDto.hitCnt}"></td>
 					<td th:text="${boardDto.createdDatetime}"></td>
 				</tr>
@@ -34,7 +41,8 @@
 					<td colspan="4">조회 결과가 없습니다.</td>
 				</tr>
 			</tbody>
-		</table>	
+		</table>
+		<a href="/board/openBoardWrite.do" class="btn">글쓰기</a>	
 	</div>
 </body>
 </html>
